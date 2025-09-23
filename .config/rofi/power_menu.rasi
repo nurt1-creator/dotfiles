@@ -1,0 +1,123 @@
+configuration {
+    show-icons: false;
+    font: "JetBrainsMono Nerd Font 12";
+    sidebar-mode: false;
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+    disable-history: false;
+    case-sensitive: false;
+}
+
+* {
+    bg-col: rgba(30, 30, 30, 0.85);
+    bg-col-light: rgba(42, 42, 42, 0.85);
+    bg-col-solid: #85888c;
+    border-col: #bbbdb9;
+    inactive-border: rgba(42, 42, 42, 0.67);
+    selected-col: #404040;
+    blue: #89b4fa;
+    fg-col: #cdfaec;
+    fg-col2: #a7ad9e;
+    grey: #6c7086;
+    red: #f38ba8;
+    green: #a6e3a1;
+    yellow: #f9e2af;
+    purple: #cba6f7;
+
+    width: 300;
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+window {
+    height: 350px;
+    border: 2px solid;
+    border-color: @border-col;
+    border-radius: 10px;
+    background-color: @bg-col;
+    transparency: "real";
+    location: center;
+    anchor: center;
+}
+
+prompt {
+    background-color: @selected-col;
+    text-color: @fg-col;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 0px 0px 10px 0px;
+    font-weight: bold;
+}
+
+inputbar {
+    children: [prompt];
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 2px;
+    margin: 10px;
+}
+
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 5;
+    cycle: false;
+    dynamic: true;
+    scrollbar: false;
+    layout: vertical;
+    reverse: false;
+    fixed-height: false;
+    fixed-columns: false;
+    spacing: 5px;
+    margin: 0px 10px 10px 10px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [inputbar, listview];
+}
+
+element {
+    background-color: @bg-col-light;
+    text-color: @fg-col;
+    orientation: horizontal;
+    border-radius: 8px;
+    border: 1px solid;
+    border-color: @inactive-border;
+    padding: 12px;
+    margin: 0px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    expand: true;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+element normal.normal,
+element alternate.normal {
+    text-color: #acadad;
+    background-color: #38393b;
+}
+
+element normal.urgent {
+    background-color: @red;
+    text-color: @bg-col-solid;
+    border-color: @red;
+}
+
+element selected {
+    background-color: @bg-col-solid;
+    text-color: @fg-col;
+    border-color: @border-col;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+element selected.urgent {
+    background-color: @red;
+    text-color: @bg-col-solid;
+    border-color: @red;
+}

@@ -1,0 +1,15 @@
+*.log
+*.bak
+*.swp
+*~
+.cache/
+.vscode/
+.idea/
+__pycache__/
+.DS_Store
+*.o
+*.so
+*.pyc
+*.lock
+*.tmp
+*.git

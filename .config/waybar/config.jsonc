@@ -1,0 +1,123 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 0,
+    "margin-top": 6,
+    "margin-left": 200,
+    "margin-right": 200,
+    "border": 10,
+    
+    "modules-left": ["temperature", "memory", "cpu", "hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["hyprland/language", "pulseaudio", "network", "custom/notification", "tray", "clock", "custom/power_menu"], 
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+	    "active": "<span foreground=\"#1793D1\">󰣇</span>",
+            "occupied": "n",
+            "default": "●",
+            "urgent": "a"
+        },
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+	    "6": []
+        }
+    },
+    
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 35,
+        "separate-outputs": true
+    },
+   
+    "hyprland/language": {
+	"format": "{}",
+	"format-en": "en",
+    	"format-ru": "ru"
+    },
+
+    "temperature": {
+        "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "<span foreground=\"red\"></span> {temperatureC}°C",
+        "format": "<span foreground=\"orange\"></span> {temperatureC}°C",
+        "tooltip": false
+    },
+    
+    "cpu": {
+        "interval": 1,
+        "format": "<span foreground=\"aqua\"></span> {usage}%",
+        "max-length": 10,
+        "tooltip": false
+    },
+    
+    "memory": {
+        "interval": 1,
+        "format": "<span foreground=\"yellow\"></span> {percentage}%",
+        "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+    },
+    
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "<span foreground=\"#036470\">{icon}</span> {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", ""]
+        },    
+	"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-scroll-up": "~/.config/hypr/Scripts/volume.sh up",
+        "on-scroll-down": "~/.config/hypr/Scripts/volume.sh down",        
+	"on-click-right": "pavucontrol"
+    },
+    
+    "network": {
+	"interval": 1,
+        "format-wifi": " {signalStrength}%",
+        "format-ethernet": "",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "nm-connection-editor"
+    },
+    
+    "clock": {
+        "tooltip-format": "<big>{:%d %B %Y}</big>\n\n<tt><small>{calendar}</small></tt>",
+        "format": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%H:%M}",
+        "format-alt": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%I:%M%p}"
+    },
+    
+    "tray": {
+        "icon-size": 16,
+        "spacing": 2
+    },
+
+    "custom/power_menu": {
+        "format": "<span foreground=\"red\"></span>",
+	"on-click": "$HOME/.config/hypr/Scripts/power_menu.sh",
+	"tooltip": false
+    },
+
+    "custom/notification": {
+    	"tooltip": false,
+    	"format": "<span foreground=\"#8b8f11\">{icon}</span>",
+    	"format-icons": {
+            "default": "",
+            "dnd-none": ""
+        },
+    	"return-type": "json",
+    	"exec-if": "which swaync-client",
+    	"exec": "swaync-client -swb",
+    	"on-click": "swaync-client -t -sw",
+    	"on-click-right": "swaync-client -d -sw",
+    	"escape": true
+    }
+}

@@ -1,0 +1,55 @@
+# Swaylock Configuration
+# Поместите этот файл в ~/.config/swaylock/config
+
+# Основные настройки
+daemonize
+screenshots
+clock
+datestr="%A, %d %B %Y"
+timestr="%H:%M"
+
+
+color=2d2d2d80
+
+ring-color=808080
+ring-clear-color=a0a0a0
+ring-caps-lock-color=b8b8b8
+ring-ver-color=909090
+ring-wrong-color=c8c8c8
+
+inside-color=00000040
+inside-clear-color=00000040
+inside-caps-lock-color=00000040
+inside-ver-color=00000040
+inside-wrong-color=00000040
+
+line-color=00000000
+line-clear-color=00000000
+line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+text-color=e5e5e5
+text-clear-color=e5e5e5
+text-caps-lock-color=e5e5e5
+text-ver-color=e5e5e5
+text-wrong-color=ffffff
+
+key-hl-color=b8b8b8
+bs-hl-color=c8c8c8
+
+font="JetBrains Mono"
+font-size=24
+
+effect-blur=15x15
+effect-vignette=1:1
+fade-in=1
+
+indicator
+indicator-radius=120
+indicator-thickness=10
+indicator-caps-lock
+
+clock
+timestr="%H:%M"
+datestr="%A, %d %B %Y"
