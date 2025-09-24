@@ -98,8 +98,8 @@
     
     "clock": {
         "tooltip-format": "<big>{:%d %B %Y}</big>\n\n<tt><small>{calendar}</small></tt>",
-        "format": "<span foreground=\"#59595c\" size=\"smaller\"></span>{:%H:%M}",
-        "format-alt": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%I:%M%p}"
+        "format": "<span foreground=\"#59595c\" size=\"smaller\">󠀲</span>󠀲󠀲︆ {:%H:%M}",
+        "format-alt": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%I:%M%p}"
     },
     
     "tray": {
