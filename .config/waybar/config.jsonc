@@ -8,7 +8,7 @@
     "margin-right": 200,
     "border": 10,
     
-    "modules-left": ["temperature", "memory", "cpu", "hyprland/window"],
+    "modules-left": ["temperature", "memory", "disk", "cpu", "hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["hyprland/language", "pulseaudio", "network", "custom/notification", "tray", "clock", "custom/power_menu"], 
     "hyprland/workspaces": {
@@ -59,10 +59,17 @@
         "tooltip": false
     },
     
+    "disk": {
+	"interval": 60,
+	"path": "/",
+	"format": "<span foreground=\"#49f5b9\"></span> {percentage_used}%",
+	"tooltip-format": "{free} out of {total} available."
+    },
+
     "memory": {
         "interval": 1,
-        "format": "<span foreground=\"yellow\"></span> {percentage}%",
-        "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
+        "format": "<span foreground=\"yellow\"></span> {used:0.1f}Gb",
+        "tooltip-format": "Swap: {swapUsed:0.1f}G/{swapTotal:0.1f}G"
     },
     
     "pulseaudio": {
@@ -91,7 +98,7 @@
     
     "clock": {
         "tooltip-format": "<big>{:%d %B %Y}</big>\n\n<tt><small>{calendar}</small></tt>",
-        "format": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%H:%M}",
+        "format": "<span foreground=\"#59595c\" size=\"smaller\"></span>{:%H:%M}",
         "format-alt": "<span foreground=\"#59595c\" size=\"smaller\"></span> {:%I:%M%p}"
     },
     
