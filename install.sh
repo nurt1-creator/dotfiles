@@ -57,6 +57,7 @@ fi
 if [[ -d ~/dotfiles ]]; then
     mkdir -p ~/.config
     cp -r ~/dotfiles/.config/* ~/.config/
+    cp -r  ~/dotfiles/.oh-my-zsh/ ~/
 else
     echo "Directory not found." >&2
     exit 1
