@@ -54,6 +54,10 @@ if grep -q "Arch Linux" /etc/os-release; then
         neovim \
         pamixer \
         pipewire \
+        pipewire-pulse \
+        pipewire-alsa \
+        pipewire-jack \
+        wireplumber \
         jq \
         grim \
         slurp \
@@ -145,6 +149,11 @@ fi
 log_step "Setting up SDDM astronaut theme..."
 ./~dotfiles/sddm/sddm-astronaut-theme/setup.sh -t pixel_sakura
 log_success "SDDM theme configured"
+
+log_step "Enabling PipeWire services..."
+systemctl --user enable pipewire pipewire-pulse wireplumber
+systemctl --user start pipewire pipewire-pulse wireplumber
+log_success "PipeWire services enabled"
 
 log_step "Enabling SDDM display manager..."
 sudo systemctl enable sddm
