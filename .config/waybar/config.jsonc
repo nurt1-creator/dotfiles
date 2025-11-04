@@ -6,7 +6,7 @@
     "margin-top": 6,
     "margin-left": 200,
     "margin-right": 200,
-    "border": 10,
+    "border": 12,
     
     "modules-left": ["temperature", "memory", "disk", "cpu", "hyprland/window"],
     "modules-center": ["hyprland/workspaces"],

@@ -1,17 +1,23 @@
-@define-color base rgba(29, 27, 38, 0.66);
+@define-color base #1d1b26;
 @define-color surface #2a2635;
 @define-color text #e6dde9;
+
+@define-color color1 #041421;
+@define-color color2 #042630; 
+@define-color color3 #4c7273;
+@define-color color4 #86b9b0;
+@define-color color5 #d0d6d6;
 
 * {
     border: none;
     border-radius: 0;
     font-family: Jet Brains Mono, "Font Awesome 6 Free", sans-serif;
     font-weight: bold;
-    color: @text;
+    color: @color5;
 }
 
 window#waybar {
-    background: @base;
+    background: @color1;
     border-radius: 8px;
     font-size: 14px;
 }
@@ -23,13 +29,13 @@ window#waybar.empty #window {
 
 tooltip {
     background: gray;
-    color: @text;
-    border: 1px solid @surface;
+    color: @color5;
+    border: 1px solid @color2;
     border-radius: 8px;
 }
 
 #workspaces {
-    background: @surface;
+    background: @color2;
     border-radius: 8px;
     margin: 5px;
     padding: 0 5px;    
@@ -59,8 +65,8 @@ tooltip {
     min-height: 0;
     padding: 2px 10px;
     margin: 5px 0;
-    background: @surface;
-    color: @text;   
+    background: @color2;
+    color: @color5;   
 }
 
 #cpu,
@@ -78,7 +84,7 @@ tooltip {
 }
 
 #language{
-    background: @surface;
+    background: @color2;
     border-radius: 8px;
     margin: 5px;    
     padding: 2px 10px;
@@ -90,7 +96,7 @@ tooltip {
     padding: 2px 10px;
     border-radius: 8px;
     margin: 5px;
-    background-color: @surface;
+    background-color: @color2;
     box-shadow: 0 0 3px rgba(120, 80, 200, 0.4);
 }
 
