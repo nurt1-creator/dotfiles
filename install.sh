@@ -52,7 +52,7 @@ install_video_drivers() {
     case $driver_choice in
         1)
             log_step "Installing NVIDIA drivers..."
-            sudo pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+            sudo pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
             log_success "NVIDIA drivers installed"
             ;;
         2)
@@ -120,6 +120,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         dolphin \
         zsh \
         mpd \
+        gum \
 
     if ! command -v yay &> /dev/null; then
         log_step "Installing yay AUR helper..."
@@ -151,12 +152,6 @@ fc-cache -fv
 cd -
 rm -rf fontawesome-free-6.5.2-desktop.zip fontawesome-free-6.5.2-desktop
 log_success "Font Awesome installed"
-
-log_step "Setting Zsh as default shell..."
-chsh -s /bin/zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-log_success "Zsh configured"
 
 if [[ -d ~/dotfiles ]]; then
     log_step "Copying dotfiles..."
@@ -203,6 +198,12 @@ log_success "PipeWire services enabled"
 log_step "Enabling SDDM display manager..."
 sudo systemctl enable sddm
 log_success "SDDM enabled"
+
+log_step "Setting Zsh as default shell..."
+chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+log_success "Zsh configured"
 
 echo
 read -rp $'\e[1;32mAll done. Reboot now? [y/N]: \e[0m' response
