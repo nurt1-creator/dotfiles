@@ -36,6 +36,49 @@ log_debug() {
     echo -e "${CYAN}[DEBUG]${NC} $1"
 }
 
+# Function to install video drivers
+install_video_drivers() {
+    log_step "Select video card drivers to install"
+    
+    echo -e "${CYAN}Available video drivers:${NC}"
+    echo -e "1) ${GREEN}NVIDIA${NC} (nvidia nvidia-utils)"
+    echo -e "2) ${GREEN}AMD${NC} (mesa vulkan-radeon)"
+    echo -e "3) ${GREEN}Intel${NC} (mesa vulkan-intel)"
+    echo -e "4) ${GREEN}All open-source${NC} (mesa vulkan-radeon vulkan-intel)"
+    echo -e "5) ${YELLOW}Skip driver installation${NC}"
+    
+    read -rp $'\e[1;32mSelect option [1-5]: \e[0m' driver_choice
+    
+    case $driver_choice in
+        1)
+            log_step "Installing NVIDIA drivers..."
+            sudo pacman -S --noconfirm nvidia-dkms nvidia-utils nvidia-settings
+            log_success "NVIDIA drivers installed"
+            ;;
+        2)
+            log_step "Installing AMD drivers..."
+            sudo pacman -S --noconfirm mesa vulkan-radeon
+            log_success "AMD drivers installed"
+            ;;
+        3)
+            log_step "Installing Intel drivers..."
+            sudo pacman -S --noconfirm mesa vulkan-intel
+            log_success "Intel drivers installed"
+            ;;
+        4)
+            log_step "Installing all open-source drivers..."
+            sudo pacman -S --noconfirm mesa vulkan-radeon vulkan-intel
+            log_success "All open-source drivers installed"
+            ;;
+        5)
+            log_warn "Skipping video driver installation"
+            ;;
+        *)
+            log_error "Invalid selection, skipping driver installation"
+            ;;
+    esac
+}
+
 log_info "Starting setup..."
 
 if grep -q "Arch Linux" /etc/os-release; then
@@ -77,7 +120,6 @@ if grep -q "Arch Linux" /etc/os-release; then
         dolphin \
         zsh \
         mpd \
-        gum \
 
     if ! command -v yay &> /dev/null; then
         log_step "Installing yay AUR helper..."
@@ -94,6 +136,9 @@ if grep -q "Arch Linux" /etc/os-release; then
     log_step "Installing AUR packages..."
     yay -S --noconfirm swaylock-effects
     log_success "AUR packages installed"
+    
+    # Video driver selection
+    install_video_drivers
 fi
 
 log_step "Installing Font Awesome..."
