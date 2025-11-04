@@ -37,7 +37,9 @@ if grep -q "Arch Linux" /etc/os-release; then
         p7zip \
         wget \
         dolphin \
-        zsh
+        zsh \
+        mpd \
+        gum \
 
     if ! command -v yay &> /dev/null; then
         echo "[INFO] Installing yay AUR helper..."
@@ -66,11 +68,14 @@ rm -rf fontawesome-free-6.5.2-desktop.zip fontawesome-free-6.5.2-desktop
 
 echo "[INFO] Setting Zsh as default shell..."
 chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
 if [[ -d ~/dotfiles ]]; then
     echo "[INFO] Copying dotfiles..."
     mkdir -p ~/.config
     cp -r ~/dotfiles/.config/* ~/.config/
+    sudo cp -r ~/dotfiles/.icons/share/* /usr/icons/share
     cp ~/dotfiles/.zshrc ~/dotfiles/.p10k.zsh ~/
 else
     echo "[ERROR] ~/dotfiles directory not found."
@@ -81,6 +86,21 @@ if [ -d "$HOME/.config/hypr/Scripts" ]; then
     echo "[INFO] Making Hyprland scripts executable..."
     find "$HOME/.config/hypr/Scripts" -type f -exec chmod +x {} \;
 fi
+
+if [ -d "$HOME/.config/rofi" ]; then
+    echo "[INFO] Making Rofi scripts executable..."
+    find "$HOME/.config/rofi/launcher" -type f -exec chmod +x {} \;
+    find "$HOME/.config/rofi/powermenu" -type f -exec chmod +x {} \;
+    find "$HOME/.config/rofi/screenshot" -type f -exec chmod +x {} \;
+    find "$HOME/.config/rofi/mplayer" -type f -exec chmod +x {} \;
+fi
+
+if [ -d "$HOME/.config/rofi" ]; then
+    echo "[INFO] Making Rofi scripts executable..."
+    find "$HOME/.config/sddm/sddm-astronaut-theme" -type f -exec chmod +x {} \;
+fi
+
+./~dotfiles/sddm/sddm-astronaut-theme/setup.sh -t pixel_sakura
 
 echo "[INFO] Enabling SDDM display manager..."
 sudo systemctl enable sddm
