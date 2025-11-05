@@ -109,7 +109,7 @@
 
     "custom/power_menu": {
         "format": "<span foreground=\"red\"></span>",
-	"on-click": "$HOME/.config/hypr/Scripts/power_menu.sh",
+	"on-click": "$HOME/.config/rofi/powermenu/powermenu.sh",
 	"tooltip": false
     },
 
