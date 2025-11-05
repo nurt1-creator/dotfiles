@@ -156,6 +156,7 @@ log_success "Font Awesome installed"
 if [[ -d ~/dotfiles ]]; then
     log_step "Copying dotfiles..."
     mkdir -p ~/.config
+    sudo mkdir -p /usr/icons/share  
     cp -r ~/dotfiles/.config/* ~/.config/
     sudo cp -r ~/dotfiles/.icons/share/* /usr/icons/share
     cp ~/dotfiles/.zshrc ~/dotfiles/.p10k.zsh ~/
@@ -180,14 +181,14 @@ if [ -d "$HOME/.config/rofi" ]; then
     log_success "Rofi scripts made executable"
 fi
 
-if [ -d "$HOME/.config/rofi" ]; then
+if [[ -d "~dotfiles/sddm" ]]; then
     log_step "Making Rofi scripts executable..."
-    find "$HOME/.config/sddm/sddm-astronaut-theme" -type f -exec chmod +x {} \;
+    find "$HOME/dotfiles/sddm/sddm-astronaut-theme" -type f -exec chmod +x {} \;
     log_success "SDDM theme scripts made executable"
 fi
 
 log_step "Setting up SDDM astronaut theme..."
-./~dotfiles/sddm/sddm-astronaut-theme/setup.sh -t pixel_sakura
+$HOME/dotfiles/sddm/sddm-astronaut-theme/setup.sh
 log_success "SDDM theme configured"
 
 log_step "Enabling PipeWire services..."
