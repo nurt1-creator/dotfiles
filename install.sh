@@ -32,10 +32,6 @@ log_step() {
     echo -e "${PURPLE}[STEP]${NC} $1"
 }
 
-log_debug() {
-    echo -e "${CYAN}[DEBUG]${NC} $1"
-}
-
 # Function to install video drivers
 install_video_drivers() {
     log_step "Select video card drivers to install"
@@ -81,6 +77,13 @@ install_video_drivers() {
 
 log_info "Starting setup..."
 
+# Установка Zsh в начале
+log_step "Setting Zsh as default shell..."
+chsh -s /bin/zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+log_success "Zsh configured"
+
 if grep -q "Arch Linux" /etc/os-release; then
     log_step "Updating system packages..."
     sudo pacman -Syu --noconfirm
@@ -120,7 +123,6 @@ if grep -q "Arch Linux" /etc/os-release; then
         dolphin \
         zsh \
         mpd \
-        gum \
 
     if ! command -v yay &> /dev/null; then
         log_step "Installing yay AUR helper..."
@@ -181,15 +183,21 @@ if [ -d "$HOME/.config/rofi" ]; then
     log_success "Rofi scripts made executable"
 fi
 
-if [[ -d "~dotfiles/sddm" ]]; then
-    log_step "Making Rofi scripts executable..."
-    find "$HOME/dotfiles/sddm/sddm-astronaut-theme" -type f -exec chmod +x {} \;
+if [[ -d "$HOME/dotfiles/sddm/sddm-astronaut-theme" ]]; then
+    log_step "Making SDDM theme scripts executable..."
+    find "$HOME/dotfiles/sddm/sddm-astronaut-theme" -type f -name "*.sh" -exec chmod +x {} \;
     log_success "SDDM theme scripts made executable"
 fi
 
-log_step "Setting up SDDM astronaut theme..."
-$HOME/dotfiles/sddm/sddm-astronaut-theme/setup.sh
-log_success "SDDM theme configured"
+if [[ -f "$HOME/dotfiles/sddm/sddm-astronaut-theme/setup.sh" ]]; then
+    log_step "Setting up SDDM astronaut theme..."
+    cd "$HOME/dotfiles/sddm/sddm-astronaut-theme"
+    ./setup.sh
+    cd -
+    log_success "SDDM theme configured"
+else
+    log_error "SDDM theme setup script not found at $HOME/dotfiles/sddm/sddm-astronaut-theme/setup.sh"
+fi
 
 log_step "Enabling PipeWire services..."
 systemctl --user enable pipewire pipewire-pulse wireplumber
@@ -200,17 +208,11 @@ log_step "Enabling SDDM display manager..."
 sudo systemctl enable sddm
 log_success "SDDM enabled"
 
-log_step "Setting Zsh as default shell..."
-chsh -s /bin/zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-log_success "Zsh configured"
-
 echo
 read -rp $'\e[1;32mAll done. Reboot now? [y/N]: \e[0m' response
 if [[ "$response" =~ ^[Yy]$ ]]; then
     log_step "Rebooting..."
-    reboot
+    sudo reboot
 else
     log_success "Setup finished without reboot."
     exit 0
