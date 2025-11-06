@@ -75,11 +75,11 @@ install_video_drivers() {
     esac
 }
 
-# Function to install Oh My Zsh (будет выполнена в самом конце)
+# Function to install Oh My Zsh
 install_omz() {
     log_step "Installing Oh My Zsh..."
-    # Устанавливаем без автоматического переключения на zsh
-    RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    # Используем полностью unattended установку
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     
     log_step "Installing Powerlevel10k theme..."
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
@@ -89,7 +89,6 @@ install_omz() {
 
 log_info "Starting setup..."
 
-# Временная установка Zsh как оболочки (без OMZ)
 log_step "Setting Zsh as default shell (temporary)..."
 if ! command -v zsh &> /dev/null; then
     sudo pacman -S --noconfirm zsh
@@ -221,10 +220,17 @@ log_step "Enabling SDDM display manager..."
 sudo systemctl enable sddm
 log_success "SDDM enabled"
 
-install_omz
-
 echo
 read -rp $'\e[1;32mAll done. Reboot now? [y/N]: \e[0m' response
+
+log_step "Installing Oh My Zsh..."
+RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+log_step "Installing Powerlevel10k theme..."
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+log_success "Oh My Zsh and Powerlevel10k installed"
+
 if [[ "$response" =~ ^[Yy]$ ]]; then
     log_step "Rebooting..."
     sudo reboot
