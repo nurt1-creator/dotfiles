@@ -170,9 +170,9 @@ log_success "Font Awesome installed"
 if [[ -d ~/dotfiles ]]; then
     log_step "Copying dotfiles..."
     mkdir -p ~/.config
-    sudo mkdir -p /usr/icons/share  
+    sudo mkdir -p /usr/share/icons  
     cp -r ~/dotfiles/.config/* ~/.config/
-    sudo cp -r ~/dotfiles/.icons/share/* /usr/icons/share
+    sudo cp -r ~/dotfiles/.icons/* /usr/share/icons
     cp ~/dotfiles/.zshrc ~/dotfiles/.p10k.zsh ~/
     log_success "Dotfiles copied"
 else
