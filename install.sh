@@ -75,14 +75,27 @@ install_video_drivers() {
     esac
 }
 
+# Function to install Oh My Zsh (будет выполнена в самом конце)
+install_omz() {
+    log_step "Installing Oh My Zsh..."
+    # Устанавливаем без автоматического переключения на zsh
+    RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    
+    log_step "Installing Powerlevel10k theme..."
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+    
+    log_success "Oh My Zsh and Powerlevel10k installed"
+}
+
 log_info "Starting setup..."
 
-# Установка Zsh в начале
-log_step "Setting Zsh as default shell..."
-chsh -s /bin/zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-log_success "Zsh configured"
+# Временная установка Zsh как оболочки (без OMZ)
+log_step "Setting Zsh as default shell (temporary)..."
+if ! command -v zsh &> /dev/null; then
+    sudo pacman -S --noconfirm zsh
+fi
+sudo chsh -s $(which zsh) $USER
+log_success "Zsh set as default shell"
 
 if grep -q "Arch Linux" /etc/os-release; then
     log_step "Updating system packages..."
@@ -121,8 +134,8 @@ if grep -q "Arch Linux" /etc/os-release; then
         p7zip \
         wget \
         dolphin \
-        zsh \
         mpd \
+        gum \
 
     if ! command -v yay &> /dev/null; then
         log_step "Installing yay AUR helper..."
@@ -145,12 +158,12 @@ if grep -q "Arch Linux" /etc/os-release; then
 fi
 
 log_step "Installing Font Awesome..."
-wget https://github.com/FortAwesome/Font-Awesome/releases/download/6.5.2/fontawesome-free-6.5.2-desktop.zip
-7z x fontawesome-free-6.5.2-desktop.zip
+wget -q https://github.com/FortAwesome/Font-Awesome/releases/download/6.5.2/fontawesome-free-6.5.2-desktop.zip
+7z x -y fontawesome-free-6.5.2-desktop.zip > /dev/null 2>&1
 cd fontawesome-free-6.5.2-desktop
 sudo mkdir -p /usr/share/fonts/OTF/fontawesome6/
 sudo cp otfs/*.otf /usr/share/fonts/OTF/fontawesome6/
-fc-cache -fv
+fc-cache -fv > /dev/null 2>&1
 cd -
 rm -rf fontawesome-free-6.5.2-desktop.zip fontawesome-free-6.5.2-desktop
 log_success "Font Awesome installed"
@@ -208,6 +221,8 @@ log_step "Enabling SDDM display manager..."
 sudo systemctl enable sddm
 log_success "SDDM enabled"
 
+install_omz
+
 echo
 read -rp $'\e[1;32mAll done. Reboot now? [y/N]: \e[0m' response
 if [[ "$response" =~ ^[Yy]$ ]]; then
@@ -215,5 +230,6 @@ if [[ "$response" =~ ^[Yy]$ ]]; then
     sudo reboot
 else
     log_success "Setup finished without reboot."
+    log_warn "Please restart your terminal or log out and log back in to use Zsh with Oh My Zsh"
     exit 0
 fi
