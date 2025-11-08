@@ -65,8 +65,8 @@ fi
 option_2=""
 option_3=""
 option_4=""
-option_5=""
-option_6=""
+option_5="󰴪"
+option_6="󰵱"
 
 # Rofi CMD
 rofi_cmd() {
@@ -89,17 +89,17 @@ run_cmd() {
 	current_title="$(playerctl metadata title 2>/dev/null)"
 	
 	if [[ "$1" == '--opt1' ]]; then
-		playerctl play-pause && notify-send -u low -t 1500 " $current_title"
+		playerctl play-pause && notify-send -u low -t 1500 "$current_title"
 	elif [[ "$1" == '--opt2' ]]; then
 		playerctl stop
 	elif [[ "$1" == '--opt3' ]]; then
-		playerctl previous && sleep 1.5 && notify-send -u low -t 1500 " $(playerctl metadata title 2>/dev/null)"
+		playerctl previous && sleep 2 && notify-send -u low -t 1500 "$(playerctl metadata title 2>/dev/null)"
 	elif [[ "$1" == '--opt4' ]]; then
-		playerctl next && sleep 1.5 && notify-send -u low -t 1500 " $(playerctl metadata title 2>/dev/null)"
-	elif [[ "$1" == '--opt5' ]]; then
-		playerctl loop Playlist
+		playerctl next && sleep 2 && notify-send -u low -t 1500 "$(playerctl metadata title 2>/dev/null)"
+    elif [[ "$1" == '--opt5' ]]; then
+		playerctl position 10- && notify-send -u low -t 1000 "$(playerctl metadata title 2>/dev/null)" "-10 seconds"
 	elif [[ "$1" == '--opt6' ]]; then
-		playerctl shuffle toggle
+		playerctl position 10+ && notify-send -u low -t 1000 "$(playerctl metadata title 2>/dev/null)" "+10 seconds"
 	fi
 }
 
