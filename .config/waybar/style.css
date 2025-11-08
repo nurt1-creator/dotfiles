@@ -25,6 +25,7 @@ window#waybar {
 window#waybar.empty #window {
     background-color: transparent;
     box-shadow: None;
+    border: None;
 }
 
 tooltip {
