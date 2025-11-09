@@ -128,6 +128,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         polkit-kde-agent \
         ttf-firacode-nerd \
         ttf-jetbrains-mono \
+        ttf-cascadia-code \
         sddm \
         swww \
         p7zip \
