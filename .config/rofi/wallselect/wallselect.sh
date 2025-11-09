@@ -25,5 +25,5 @@ if [ -n "$selected" ]; then
         --transition-fps 144 \
         --transition-duration 1.5
 
-    notify-send "Wallpaper changed" "Installed: $selected" -i "$full_path"
+    notify-send "Wallpaper changed" "Installed: $selected"
 fi
