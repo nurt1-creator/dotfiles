@@ -15,7 +15,7 @@ readonly PATH_TO_GIT_CLONE="$HOME/$THEME_NAME"
 readonly DATE=$(date +%s)
 
 # Default theme - change this to your preferred theme
-readonly DEFAULT_THEME="astronaut"
+DEFAULT_THEME="pixel_sakura"
 
 # Logging functions
 info() {
