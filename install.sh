@@ -194,6 +194,8 @@ if [ -d "$HOME/.config/rofi" ]; then
     find "$HOME/.config/rofi/powermenu" -type f -exec chmod +x {} \;
     find "$HOME/.config/rofi/screenshot" -type f -exec chmod +x {} \;
     find "$HOME/.config/rofi/mplayer" -type f -exec chmod +x {} \;
+    find "$HOME/.config/rofi/wallselect" -type f -exec chmod +x {} \;
+    find "$HOME/.config/rofi/clipboard" -type f -exec chmod +x {} \;
     log_success "Rofi scripts made executable"
 fi
 
