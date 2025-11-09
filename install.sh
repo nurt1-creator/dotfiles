@@ -117,6 +117,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         pipewire-jack \
         wireplumber \
         jq \
+        code \
         grim \
         slurp \
         wl-clipboard \
@@ -134,7 +135,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         p7zip \
         wget \
         dolphin \
-        mpd \
+        lsd \
         gum \
 
     if ! command -v yay &> /dev/null; then
