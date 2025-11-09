@@ -208,7 +208,7 @@ fi
 if [[ -f "$HOME/dotfiles/sddm/sddm-astronaut-theme/setup.sh" ]]; then
     log_step "Setting up SDDM astronaut theme..."
     cd "$HOME/dotfiles/sddm/sddm-astronaut-theme"
-    ./setup.sh
+    ./setup.sh -t pixel_sakura
     cd -
     log_success "SDDM theme configured"
 else
