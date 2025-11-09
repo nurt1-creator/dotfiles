@@ -73,7 +73,7 @@ tooltip {
     color: @color5;   
 }
 
-#cpu,
+#disk,
 #custom-power_menu {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
@@ -81,7 +81,7 @@ tooltip {
     margin-right: 5px;
 }
 
-#temperature,
+#cpu,
 #pulseaudio {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;

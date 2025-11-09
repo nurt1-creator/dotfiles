@@ -8,7 +8,7 @@
     "margin-right": 200,
     "border": 12,
     
-    "modules-left": ["temperature", "memory", "disk", "cpu", "hyprland/window"],
+    "modules-left": ["cpu", "temperature", "memory", "disk", "hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["hyprland/language", "pulseaudio", "network", "custom/notification", "tray", "clock", "custom/power_menu"], 
     "hyprland/workspaces": {
