@@ -163,8 +163,8 @@ log_step "Installing Font Awesome..."
 wget -q https://github.com/FortAwesome/Font-Awesome/releases/download/6.5.2/fontawesome-free-6.5.2-desktop.zip
 7z x -y fontawesome-free-6.5.2-desktop.zip > /dev/null 2>&1
 cd fontawesome-free-6.5.2-desktop
-sudo mkdir -p /usr/share/fonts/OTF/fontawesome6/
-sudo cp otfs/*.otf /usr/share/fonts/OTF/fontawesome6/
+sudo mkdir -p /usr/share/fonts/TTF/fontawesome6/
+sudo cp otfs/*.otf /usr/share/fonts/TTF/fontawesome6/
 fc-cache -fv > /dev/null 2>&1
 cd -
 rm -rf fontawesome-free-6.5.2-desktop.zip fontawesome-free-6.5.2-desktop
