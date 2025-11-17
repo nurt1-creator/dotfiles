@@ -138,6 +138,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         dolphin \
         lsd \
         gum \
+        xdg-desktop-portal-hyprland \
 
     if ! command -v yay &> /dev/null; then
         log_step "Installing yay AUR helper..."
