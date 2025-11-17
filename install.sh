@@ -130,6 +130,7 @@ if grep -q "Arch Linux" /etc/os-release; then
         ttf-firacode-nerd \
         ttf-jetbrains-mono \
         ttf-cascadia-code \
+        noto-fonts-emoji \
         sddm \
         swww \
         p7zip \
