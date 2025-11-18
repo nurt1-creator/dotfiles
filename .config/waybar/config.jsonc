@@ -4,8 +4,8 @@
     "height": 36,
     "spacing": 0,
     "margin-top": 6,
-    "margin-left": 200,
-    "margin-right": 200,
+    "margin-left": 100,
+    "margin-right": 100,
     "border": 12,
     
     "modules-left": ["cpu", "temperature", "memory", "disk", "hyprland/window"],
