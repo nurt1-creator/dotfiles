@@ -78,10 +78,10 @@ install_video_drivers() {
 install_fonts() {
 	log_step "\n[*] Installing fonts..."
 	if [[ -d $HOME/.local/share/fonts ]]; then
-		cp -rf $DIR/fonts/* $HOME/.local/share/fonts
+		cp -rf $HOME/dotfiles/fonts/* $HOME/.local/share/fonts
 	else
 		mkdir -p $HOME/.local/share/fonts
-		cp -rf $DIR/fonts/* $HOME/.local/share/fonts
+		cp -rf $HOME/dotfiles/fonts/* $HOME/.local/share/fonts
 	fi
 	log_step "Updating font cache...\n"
 	fc-cache
