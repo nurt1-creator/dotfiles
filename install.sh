@@ -75,10 +75,20 @@ install_video_drivers() {
     esac
 }
 
-# Function to install Oh My Zsh
+install_fonts() {
+	log_step "\n[*] Installing fonts..."
+	if [[ -d $HOME/.local/share/fonts ]]; then
+		cp -rf $DIR/fonts/* $HOME/.local/share/fonts
+	else
+		mkdir -p $HOME/.local/share/fonts
+		cp -rf $DIR/fonts/* $HOME/.local/share/fonts
+	fi
+	log_step "Updating font cache...\n"
+	fc-cache
+}
+
 install_omz() {
     log_step "Installing Oh My Zsh..."
-    # Используем полностью unattended установку
     RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     
     log_step "Installing Powerlevel10k theme..."
@@ -157,8 +167,8 @@ if grep -q "Arch Linux" /etc/os-release; then
         papirus-icon-theme
     log_success "AUR packages installed"
     
-    # Video driver selection
     install_video_drivers
+    install_fonts
 fi
 
 log_step "Installing Font Awesome..."
