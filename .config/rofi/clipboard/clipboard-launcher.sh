@@ -5,5 +5,19 @@
 dir="$HOME/.config/rofi/clipboard"
 theme='style'
 
-## Run
-cliphist list | rofi -dmenu -i -p "󰅍 Clipboard" -theme "${dir}/${theme}.rasi" | cliphist decode | wl-copy
+options="󰆴 Clear All\n$(cliphist list)"
+
+result=$(echo -e "$options" | rofi -dmenu -i -p "󰅍 Clipboard" -theme "${dir}/${theme}.rasi")
+
+case "$result" in
+    "󰆴 Clear All")
+        cliphist wipe
+        notify-send -u low -t 1500 "Clipboard" "󰆴 Clipboard cleared"
+        ;;
+    *)
+        if [[ -n "$result" ]]; then
+            echo "$result" | cliphist decode | wl-copy
+            notify-send -u low -t 1500 "Clipboard" "󰅍 Copied to clipboard"
+        fi
+        ;;
+esac
