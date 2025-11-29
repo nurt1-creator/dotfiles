@@ -164,7 +164,8 @@ if grep -q "Arch Linux" /etc/os-release; then
 
     log_step "Installing AUR packages..."
     yay -S --noconfirm swaylock-effects \
-        papirus-icon-theme
+        papirus-icon-theme \
+        pywal
     log_success "AUR packages installed"
     
     install_video_drivers

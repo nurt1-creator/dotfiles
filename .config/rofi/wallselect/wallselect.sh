@@ -18,7 +18,11 @@ selected=$(printf "$entries" | rofi -dmenu \
 
 if [ -n "$selected" ]; then
     full_path="$folder/$selected"
-    
+   
+    mkdir -p $HOME/.config/waybar/colors/
+    cp -r $HOME/.cache/wal/colors-waybar.css $HOME/.config/waybar/colors
+    wal -i "$full_path" -n
+
     swww img "$full_path" \
         --transition-type wave \
         --transition-step 120 \

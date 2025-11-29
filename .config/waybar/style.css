@@ -1,23 +1,21 @@
-@define-color base #1d1b26;
-@define-color surface #2a2635;
-@define-color text #e6dde9;
+@import "./colors/colors-waybar.css";
 
-@define-color color1 #041421;
-@define-color color2 #042630; 
-@define-color color3 #4c7273;
-@define-color color4 #86b9b0;
-@define-color color5 #d0d6d6;
+@define-color background alpha(@color0, 0.7);
+@define-color background-alt shade(@color8, 0.85);
+@define-color foreground @color7;
+@define-color accent @color4;
+@define-color warning @color1;
 
 * {
     border: none;
     border-radius: 0;
     font-family: Jet Brains Mono, "Font Awesome 6 Free", sans-serif;
     font-weight: bold;
-    color: @color5;
+    color: @foreground;
 }
 
 window#waybar {
-    background: @color1;
+    background: @background;
     border-radius: 8px;
     font-size: 14px;
 }
@@ -29,28 +27,31 @@ window#waybar.empty #window {
 }
 
 tooltip {
-    background: gray;
-    color: @color5;
-    border: 1px solid @color2;
+    background: @background-alt;
+    color: @foreground;
+    border: 1px solid @accent;
     border-radius: 8px;
 }
 
 #workspaces {
-    background: @color2;
+    background: @background-alt;
     border-radius: 8px;
     margin: 5px;
     padding: 0 5px;    
-    border: 1px solid rgba(120, 80, 200, 0.17);
+    border: 1px solid @accent;
 }
 
 #workspaces button.active {
     font-size: 20px;
+    color: @background;
+    background: @accent;
+    border-radius: 8px;
 }
 
 #workspaces button:hover {
-    background: rgba(152, 158, 227, 0.2);
+    background: @accent;
     border-radius: 8px;
-    box-shadow: 0 0 3px rgba(149, 155, 219, 0.4);
+    box-shadow: 0 0 3px @foreground;
 }
 
 #clock,
@@ -65,19 +66,19 @@ tooltip {
 #custom-power_menu {
     min-height: 0;
     box-shadow: none;
-    border-top: 1px solid rgba(120, 80, 200, 0.17);
-    border-bottom: 1px solid rgba(120, 80, 200, 0.17);
+    border-top: 1px solid @accent;
+    border-bottom: 1px solid @accent;
     padding: 2px 10px;
     margin: 5px 0;
-    background: @color2;
-    color: @color5;   
+    background: @background-alt;
+    color: @foreground;   
 }
 
 #disk,
 #custom-power_menu {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    border-right: 1px solid rgba(120, 80, 200, 0.17);
+    border-right: 1px solid @accent;
     margin-right: 5px;
 }
 
@@ -85,16 +86,16 @@ tooltip {
 #pulseaudio {
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    border-left: 1px solid rgba(120, 80, 200, 0.17);
+    border-left: 1px solid @accent;
     margin-left: 5px;
 }
 
 #language{
-    background: @color2;
+    background: @background-alt;
     border-radius: 8px;
     margin: 5px;    
     padding: 2px 10px;
-    border: 1px solid rgba(120, 80, 200, 0.17);
+    border: 1px solid @accent;
 }
 
 #window {
@@ -102,10 +103,22 @@ tooltip {
     padding: 2px 10px;
     border-radius: 8px;
     margin: 5px;
-    background-color: @color2;
-    border: 1px solid rgba(120, 80, 200, 0.17);
+    background-color: @background-alt;
+    border: 1px solid @accent;
 }
 
 #custom-power_menu {
     padding-right: 10px;
+}
+
+#cpu.warning,
+#memory.warning,
+#temperature.warning {
+    color: @accent;
+}
+
+#cpu.critical,
+#memory.critical,
+#temperature.critical {
+    color: @warning;
 }
