@@ -1,10 +1,8 @@
-@import "./colors/colors-waybar.css";
-
-@define-color background alpha(@color0, 0.7);
-@define-color background-alt shade(@color8, 0.85);
-@define-color foreground @color7;
-@define-color accent @color4;
-@define-color warning @color1;
+@define-color background #282c34;
+@define-color background-alt #353b45;
+@define-color foreground #abb2bf;
+@define-color accent #61afef;
+@define-color warning #e06c75;
 
 * {
     border: none;
@@ -15,7 +13,8 @@
 }
 
 window#waybar {
-    background: @background;
+    /* background: @background; */
+    background: transparent;
     border-radius: 8px;
     font-size: 14px;
 }
