@@ -46,7 +46,8 @@ The script will:
 
 ## 🎨 Screenshots
 
-(to be added later)
+![Desktop](./screenshots/desktop.png)
+
 ## 🛠️ Dependencies
 #### Main packages installed by the script:
 - **Compositor**: hyprland
@@ -116,7 +117,8 @@ chmod +x install.sh
 - После установки рекомендуется перезагрузиться.
 ## 🎨 Скриншоты
 
-(будут добавлены позже)
+![Desktop](./screenshots/desktop.png)
+
 ## 🛠️ Зависимости
 
 #### Основные пакеты, устанавливаемые скриптом:
